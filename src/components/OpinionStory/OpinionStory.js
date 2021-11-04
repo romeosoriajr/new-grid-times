@@ -1,15 +1,16 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import { QUERIES } from '../../constants.js';
 
 const OpinionStory = ({ id, title, author, avatar }) => {
   return (
     <a href={`/story/${id}`}>
       <Wrapper>
         <Avatar alt="" src={avatar} />
-        <div>
+        <Info>
           <AuthorName>{author}</AuthorName>
           <ArticleTitle>{title}</ArticleTitle>
-        </div>
+        </Info>
       </Wrapper>
     </a>
   );
@@ -17,9 +18,21 @@ const OpinionStory = ({ id, title, author, avatar }) => {
 
 const Wrapper = styled.article`
   color: var(--color-gray-900);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: 'info avatar';
+
+
+  @media ${QUERIES.tabletOnly} {
+    display: revert;
+  }
 `;
 
+const Info = styled.div`
+  grid-area: info;
+`
 const Avatar = styled.img`
+  grid-area: avatar;
   display: block;
   width: 48px;
   height: 48px;
